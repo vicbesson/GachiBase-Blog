@@ -691,14 +691,19 @@ Where pim.PostID = {PostID}", conn);
                 conn.Close();
             }
         }
-        public void DeleteComment(string CommentID)
+        public void DeleteComment(string CommentID, string UserName)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand($@"DELETE FROM [dbo].[Comments]
       Where CommentID = {CommentID}", conn);
+                SqlCommand cmd2 = new SqlCommand($@"UPDATE [dbo].[Users]
+   SET 
+      [NumComments] = NumComments - 1
+	  Where Username = '{UserName}'", conn);
                 conn.Open();
                 cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
                 conn.Close();
             }
             catch(Exception ex)

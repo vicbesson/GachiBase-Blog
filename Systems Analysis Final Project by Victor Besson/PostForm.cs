@@ -176,7 +176,7 @@ namespace Systems_Analysis_Final_Project_by_Victor_Besson
                         btnDelete.Height = pnInfo.Height;
                         btnDelete.Left = pnInfo.Width - btnDelete.Width;
                         btnDelete.Top = 0;
-                        btnDelete.Click += new EventHandler((sender, e) => btnDelete_Click(sender, e, row["CommentID"].ToString(), pnInfo, tmpLabel));
+                        btnDelete.Click += new EventHandler((sender, e) => btnDelete_Click(sender, e, row["CommentID"].ToString(), row["Username"].ToString(), pnInfo, tmpLabel));
                         pnInfo.Controls.Add(btnDelete);
                     }
             }
@@ -199,9 +199,9 @@ namespace Systems_Analysis_Final_Project_by_Victor_Besson
                 this.Close();
             }
         }
-        private void btnDelete_Click(object sender, EventArgs e, string CommentID, Panel pn, Label lbl)
+        private void btnDelete_Click(object sender, EventArgs e, string CommentID, string userName, Panel pn, Label lbl)
         {
-            tmpdb.DeleteComment(CommentID);
+            tmpdb.DeleteComment(CommentID, userName);
             pn.Dispose();
             lbl.Dispose();
         }
